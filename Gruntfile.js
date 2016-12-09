@@ -6,7 +6,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: pkg,
     exec: {
-      update: "cd ./twig.js/ git pull origin master && cd ../",
+      update: "cd ./twig.js/ && git pull origin master && cd ../",
       build: "cd ./twig.js/ && npm run build && cd ../"
     },
     copy: {
