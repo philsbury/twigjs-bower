@@ -7,8 +7,7 @@ module.exports = function(grunt) {
     pkg: pkg,
     exec: {
       update: "cd ./twig.js/ && git pull origin master && cd ../",
-      build: "cd ./twig.js/ && npm run build && cd ../",
-      git: 'git add . && git commit -m "Update to <%= pkg.version %>" && git tag -a <%= pkg.version %>'
+      build: "cd ./twig.js/ && npm run build && cd ../"
     },
     copy: {
       main: {
@@ -21,7 +20,47 @@ module.exports = function(grunt) {
           }
         ]
       }
-    }
+    },
+    gitadd: {
+      dist: {
+        options: {
+          force: false
+        },
+        files: {
+          src: ['*']
+        }
+      }
+    },
+    gitcommit: {
+      dist: {
+        options: {
+          cwd: "./",
+          message: "Update to <%= pkg.version %>"
+        },
+        files: [
+          {
+            src: ["*", "!node_modules", "!twig.js"],
+            expand: true,
+            cwd: "./"
+          }
+        ]
+      }
+    },
+    gittag: {
+      dist: {
+        options: {
+          tag: '<%= pkg.version %>'
+        }
+      }
+    },
+    gitpush: {
+      dist: {
+        options: {
+          remote: 'origin'
+          // Target-specific options go here. 
+        }
+      }
+    },
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -39,7 +78,7 @@ module.exports = function(grunt) {
       fs.writeFileSync("package.json",json);
 
       grunt.config('pkg', twig.version);
-      grunt.task.run('exec:git');
+      
     }
 
   });
