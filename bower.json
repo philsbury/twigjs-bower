@@ -1,7 +1,7 @@
 {
   "name": "twigjs-bower",
   "description": "A version of Twig JS for use with Bower",
-  "main": "twig/twig.js",
+  "main": "twig/twig.min.js",
   "authors": [
     "Phil Baker <phil.baker@asylumdigital.net>"
   ],
