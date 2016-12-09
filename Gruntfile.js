@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     exec: {
       update: "cd ./twig.js/ && git pull origin master && cd ../",
       build: "cd ./twig.js/ && npm run build && cd ../",
-      git: 'git add . && git commit -m "Update to <%= pkg.version %>" && git push --all'
+      git: 'git add . && git commit -m "Update to <%= pkg.version %>" && git tag -a <%= pkg.version %>'
     },
     copy: {
       main: {
