@@ -20,7 +20,14 @@ module.exports = function(grunt) {
           }
         ]
       }
-    }
+    },
+    gittag: {
+      version: {
+        options: {
+          tag: '<%= pkg.version %>'
+        }
+      }
+    },
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -29,11 +36,17 @@ module.exports = function(grunt) {
   grunt.registerTask('test', function() {
     var twig = grunt.file.readJSON('twig.js/package.json');
 
+    
+
     if(pkg.version !== twig.version){
       pkg.version = twig.version;
       var fs = require("fs"); 
-      var json = JSON.stringify(pkg, null, 4); 
+      var json = JSON.stringify(pkg, null, 2); 
       fs.writeFileSync("package.json",json);
+
+      grunt.config('pkg', twig.version);
+      
+      grunt.task.run('gittag');
     }
 
   });
