@@ -1,6 +1,6 @@
 {
   "name": "twigjs-bower",
-  "version": "0.10.3",
+  "version": "1.10.5",
   "description": "A version of Twig JS for use with Bower",
   "main": "twig.js",
   "scripts": {
